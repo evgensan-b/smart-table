@@ -40,10 +40,10 @@ function render(action) {
     let state = collectState(); // состояние полей из таблицы
     let result = [...data]; // копируем для последующего изменения
     // @todo: использование
-    result = applySearching(result, state, action);
-    result = applyFiltering(result, state, action);
-    result = applySorting(result, state, action);
-    result = applyPagination(result, state, action);
+    // result = applySearching(result, state, action);
+    // result = applyFiltering(result, state, action);
+    // result = applySorting(result, state, action);
+    // result = applyPagination(result, state, action);
 
 
     sampleTable.render(result)
@@ -74,9 +74,9 @@ const applySorting = initSorting([              // Нам нужно перед�
     sampleTable.header.elements.sortByTotal
 ]);
 
-const applyFiltering = initFiltering(sampleTable.filter.elements, {    // передаём элементы фильтра
-    searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
-});
+// const applyFiltering = initFiltering(sampleTable.filter.elements, {    // передаём элементы фильтра
+//     searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
+// });
 
 const applySearching = initSearching('search');  // Передаем имя поля для поиска
 
