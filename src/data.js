@@ -1,4 +1,4 @@
-import {makeIndex} from "./lib/utils.js";
+import { makeIndex } from "./lib/utils.js";
 
 const BASE_URL = 'https://webinars.webdev.education-services.ru/sp7-api';
 
@@ -20,23 +20,23 @@ export function initData(sourceData) {
 
     // функция получения индексов
     const getIndexes = async () => {
-        if (!sellers || !customers) { // если индексы ещё не установлены, то делаем запросы
-            [sellers, customers] = await Promise.all([ // запрашиваем и деструктурируем в уже объявленные ранее переменные
-                fetch(`${BASE_URL}/sellers`).then(res => res.json()), // запрашиваем продавцов
+        if (!sellers || !customers) {                                   // если индексы ещё не установлены, то делаем запросы
+            [sellers, customers] = await Promise.all([                  // запрашиваем и деструктурируем в уже объявленные ранее переменные
+                fetch(`${BASE_URL}/sellers`).then(res => res.json()),   // запрашиваем продавцов
                 fetch(`${BASE_URL}/customers`).then(res => res.json()), // запрашиваем покупателей
             ]);
         }
 
         return { sellers, customers };
-    }
+    };
 
     // функция получения записей о продажах с сервера
     const getRecords = async (query, isUpdated = false) => {
-        const qs = new URLSearchParams(query); // преобразуем объект параметров в SearchParams объект, представляющий query часть url
-        const nextQuery = qs.toString(); // и приводим к строковому виду
+        const qs = new URLSearchParams(query);  // преобразуем объект параметров в SearchParams объект, представляющий query часть url
+        const nextQuery = qs.toString();        // и приводим к строковому виду
 
         if (lastQuery === nextQuery && !isUpdated) { // isUpdated параметр нужен, чтобы иметь возможность делать запрос без кеша
-            return lastResult; // если параметры запроса не поменялись, то отдаём сохранённые ранее данные
+            return lastResult;                       // если параметры запроса не поменялись, то отдаём сохранённые ранее данные
         }
 
         // если прошлый квери не был ранее установлен или поменялись параметры, то запрашиваем данные с сервера
